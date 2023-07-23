@@ -1,0 +1,82 @@
+public class Selenium1 {
+			
+			public WebDriver driver;
+			
+			@BeforeTest
+			public void System() {
+				System.setProperty("webdriver.chrome.driver",
+						"C:\\Users\\LENOVO\\Downloads\\chromedriver_win32 (1)\\chromedriver.exe");
+				driver = new ChromeDriver();
+			}
+			
+			@Test(priority = 1,groups = "HomePage Webmath ")
+			public void homePageVisibilty() {
+				driver.get("https://www.webmath.com/");
+				driver.manage().window().maximize();
+				
+			}
+			@Test(priority =2 ,groups = "Plots And Geometry Webmath ")
+			public void plotsAndGeometry() {
+				FileInputStream d = null;
+				try {
+					d = new FileInputStream("C:\\Users\\LENOVO\\Desktop\\Project1 Webmath.xlsx");
+				} catch (FileNotFoundException e) {	
+				e.printStackTrace();
+				}
+				XSSFWorkbook wb = null;
+				try {
+					wb = new XSSFWorkbook(d);
+				} catch (IOException e) {	
+					e.printStackTrace();
+				}
+				XSSFSheet ws=wb.getSheet("Sheet1");
+				//Plots and Geometry
+				String a=ws.getRow(2).getCell(1).getStringCellValue();
+				driver.findElement(By.id(a)).click();
+@Test(priority =3 ,groups = " Lines Module")
+		public void lines()  {
+			FileInputStream d = null;
+			try {
+				d = new FileInputStream("C:\\Users\\LENOVO\\Desktop\\Project1 Webmath.xlsx");
+			} catch (FileNotFoundException e) {	
+					e.printStackTrace();
+			}
+			XSSFWorkbook wb = null;
+			try {
+				wb = new XSSFWorkbook(d);
+			} catch (IOException e) {	
+					e.printStackTrace();
+			}
+			XSSFSheet ws=wb.getSheet("Sheet1");
+		//Lines Page
+			String lines=ws.getRow(30).getCell(1).getStringCellValue();
+			driver.findElement(By.xpath(lines)).click();
+		//Enter Y Co-ordinate
+			String line1=ws.getRow(31).getCell(1).getStringCellValue();
+			driver.findElement(By.name(line1)).click();
+			driver.manage().timeouts().implicitlyWait(3000, TimeUnit.SECONDS);
+			String pointY1=ws.getRow(31).getCell(2).getStringCellValue();
+			driver.findElement(By.name(line1)).sendKeys(pointY1);
+			driver.manage().timeouts().implicitlyWait(3000, TimeUnit.SECONDS);
+		//Enter Y Co-ordinate
+			String line2=ws.getRow(32).getCell(1).getStringCellValue();
+			driver.findElement(By.name(line2)).click();
+			driver.manage().timeouts().implicitlyWait(3000, TimeUnit.SECONDS);
+			String pointX1=ws.getRow(32).getCell(2).getStringCellValue();
+			driver.findElement(By.name(line2)).sendKeys(pointX1);
+			driver.manage().timeouts().implicitlyWait(3000, TimeUnit.SECONDS);
+		//Check Answer
+			String answer=ws.getRow(33).getCell(1).getStringCellValue();
+			driver.findElement(By.xpath(answer)).click();
+			driver.navigate().to("https://www.webmath.com/index5.html");
+			
+			
+		}
+
+		}
+			@AfterTest
+			public void a1() {
+				driver.close();
+				}
+			}
+		
