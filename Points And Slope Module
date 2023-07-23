@@ -1,0 +1,94 @@
+package asignments;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+public class Selenium1 {
+	
+	public WebDriver driver;
+	
+	@BeforeTest
+	public void System() {
+		System.setProperty("webdriver.chrome.driver",
+				"C:\\Users\\LENOVO\\Downloads\\chromedriver_win32 (1)\\chromedriver.exe");
+		driver = new ChromeDriver();
+	}
+	
+	@Test(priority = 1,groups = "HomePage Webmath ")
+	public void homePageVisibilty() {
+		driver.get("https://www.webmath.com/");
+		driver.manage().window().maximize();
+		
+	}
+	@Test(priority =2 ,groups = "Plots And Geometry Webmath ")
+	public void plotsAndGeometry() {
+		FileInputStream d = null;
+		try {
+			d = new FileInputStream("C:\\Users\\LENOVO\\Desktop\\Project1 Webmath.xlsx");
+		} catch (FileNotFoundException e) {	
+		e.printStackTrace();
+		}
+		XSSFWorkbook wb = null;
+		try {
+			wb = new XSSFWorkbook(d);
+		} catch (IOException e) {	
+			e.printStackTrace();
+		}
+		XSSFSheet ws=wb.getSheet("Sheet1");
+		//Plots and Geometry
+		String a=ws.getRow(2).getCell(1).getStringCellValue();
+		driver.findElement(By.id(a)).click();
+
+	@Test(priority =3 ,groups = "Points ANd Slope Module")
+		public void pointsAndSlope() {
+			FileInputStream d = null;
+			try {
+				d = new FileInputStream("C:\\Users\\LENOVO\\Desktop\\Project1 Webmath.xlsx");
+			} catch (FileNotFoundException e) {	
+			e.printStackTrace();
+			}
+			XSSFWorkbook wb = null;
+			try {
+				wb = new XSSFWorkbook(d);
+			} catch (IOException e) {	
+				e.printStackTrace();
+			}
+			XSSFSheet ws=wb.getSheet("Sheet1");
+		//Points&Slope
+			String pointsSlope=ws.getRow(10).getCell(1).getStringCellValue();
+			driver.manage().timeouts().implicitlyWait(3000, TimeUnit.SECONDS);
+			driver.findElement(By.xpath(pointsSlope)).click();
+			//Enter Point1
+			String point1=ws.getRow(11).getCell(1).getStringCellValue();
+			driver.findElement(By.xpath(point1)).click();
+			String pointX1=ws.getRow(11).getCell(2).getStringCellValue();
+			driver.findElement(By.xpath(point1)).sendKeys(pointX1);
+			driver.manage().timeouts().implicitlyWait(3000, TimeUnit.SECONDS);
+			//Enter Point2
+			String point2=ws.getRow(12).getCell(1).getStringCellValue();
+			driver.findElement(By.xpath(point2)).click();
+			String pointX2=ws.getRow(12).getCell(2).getStringCellValue();
+			driver.findElement(By.xpath(point2)).sendKeys(pointX2);
+			driver.manage().timeouts().implicitlyWait(3000, TimeUnit.SECONDS);
+		//Enter Slope
+			String slope=ws.getRow(13).getCell(1).getStringCellValue();
+			driver.findElement(By.xpath(slope)).click();
+			String slopeM=ws.getRow(13).getCell(2).getStringCellValue();
+			driver.findElement(By.xpath(slope)).sendKeys(slopeM);
+			driver.manage().timeouts().implicitlyWait(3000, TimeUnit.SECONDS);
+		//Check The Answer
+			String answer=ws.getRow(14).getCell(1).getStringCellValue();
+			driver.findElement(By.xpath(answer)).click();
+			driver.navigate().to("https://www.webmath.com/index5.html");
+		}
