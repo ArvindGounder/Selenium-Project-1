@@ -1,0 +1,75 @@
+public class Selenium1 {
+			
+			public WebDriver driver;
+			
+			@BeforeTest
+			public void System() {
+				System.setProperty("webdriver.chrome.driver",
+						"C:\\Users\\LENOVO\\Downloads\\chromedriver_win32 (1)\\chromedriver.exe");
+				driver = new ChromeDriver();
+			}
+			
+			@Test(priority = 1,groups = "HomePage Webmath ")
+			public void homePageVisibilty() {
+				driver.get("https://www.webmath.com/");
+				driver.manage().window().maximize();
+				
+			}
+			@Test(priority =2 ,groups = "Plots And Geometry Webmath ")
+			public void plotsAndGeometry() {
+				FileInputStream d = null;
+				try {
+					d = new FileInputStream("C:\\Users\\LENOVO\\Desktop\\Project1 Webmath.xlsx");
+				} catch (FileNotFoundException e) {	
+				e.printStackTrace();
+				}
+				XSSFWorkbook wb = null;
+				try {
+					wb = new XSSFWorkbook(d);
+				} catch (IOException e) {	
+					e.printStackTrace();
+				}
+				XSSFSheet ws=wb.getSheet("Sheet1");
+				//Plots and Geometry
+				String a=ws.getRow(2).getCell(1).getStringCellValue();
+				driver.findElement(By.id(a)).click();
+
+@Test(priority = 3 ,groups = " Spheres Module")
+		public void spheres()  {
+			FileInputStream d = null;
+			try {
+				d = new FileInputStream("C:\\Users\\LENOVO\\Desktop\\Project1 Webmath.xlsx");
+			} catch (FileNotFoundException e) {	
+	         	e.printStackTrace();
+			}
+			XSSFWorkbook wb = null;
+			try {
+				wb = new XSSFWorkbook(d);
+			} catch (IOException e) {	
+			e.printStackTrace();
+			}
+			XSSFSheet ws=wb.getSheet("Sheet1");
+		//Spheres
+			String spheres=ws.getRow(52).getCell(1).getStringCellValue();
+			driver.findElement(By.xpath(spheres)).click();
+		//Enter Sphere Radius
+			String r1=ws.getRow(53).getCell(1).getStringCellValue();
+			driver.findElement(By.name(r1)).click();
+			String r2=ws.getRow(53).getCell(2).getStringCellValue();
+			driver.findElement(By.name(r1)).sendKeys(r2);
+			driver.manage().timeouts().implicitlyWait(3000, TimeUnit.SECONDS);
+		//Draw Sphere Radius
+			String draw=ws.getRow(54).getCell(1).getStringCellValue();
+			driver.findElement(By.xpath(draw)).click();
+			driver.navigate().to("https://www.webmath.com/index5.html");
+			
+		}
+
+
+		}
+			@AfterTest
+			public void a1() {
+				driver.close();
+				}
+			}
+		
