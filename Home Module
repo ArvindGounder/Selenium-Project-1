@@ -1,0 +1,182 @@
+package asignments;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+public class Selenium1 {
+	
+	public WebDriver driver;
+	
+	@BeforeTest
+	public void System() {
+		System.setProperty("webdriver.chrome.driver",
+				"C:\\Users\\LENOVO\\Downloads\\chromedriver_win32 (1)\\chromedriver.exe");
+		driver = new ChromeDriver();
+	}
+	
+	@Test(priority = 1,groups = "HomePage Webmath ")
+	public void homePageVisibilty() {
+		driver.get("https://www.webmath.com/");
+		driver.manage().window().maximize();
+		
+	}
+	@Test(priority =2 ,groups = "Plots And Geometry Webmath ")
+	public void plotsAndGeometry() {
+		FileInputStream d = null;
+		try {
+			d = new FileInputStream("C:\\Users\\LENOVO\\Desktop\\Project1 Webmath.xlsx");
+		} catch (FileNotFoundException e) {	
+		e.printStackTrace();
+		}
+		XSSFWorkbook wb = null;
+		try {
+			wb = new XSSFWorkbook(d);
+		} catch (IOException e) {	
+				e.printStackTrace();
+		}
+		XSSFSheet ws=wb.getSheet("Sheet1");
+		//Plots and Geometry
+		String a=ws.getRow(2).getCell(1).getStringCellValue();
+		driver.findElement(By.id(a)).click();
+	}
+
+		
+@Test(priority =3 ,groups = " Home Module")
+		public void home()  {
+			FileInputStream d = null;
+			try {
+				d = new FileInputStream("C:\\Users\\LENOVO\\Desktop\\Project1 Webmath.xlsx");
+			} catch (FileNotFoundException e) {	
+				e.printStackTrace();
+			}
+			XSSFWorkbook wb = null;
+			try {
+				wb = new XSSFWorkbook(d);
+			} catch (IOException e) {	
+					e.printStackTrace();
+			}
+			XSSFSheet ws=wb.getSheet("Sheet1");
+			//  Home Module
+			String module=ws.getRow(68).getCell(1).getStringCellValue();
+			driver.findElement(By.xpath(module)).click();
+			driver.navigate().to("https://www.webmath.com/index5.html");
+		}
+		@Test(priority =4 ,groups = " Contact_Us Module")
+		public void contactUs()  {
+			FileInputStream d = null;
+			try {
+				d = new FileInputStream("C:\\Users\\LENOVO\\Desktop\\Project1 Webmath.xlsx");
+			} catch (FileNotFoundException e) {	
+					e.printStackTrace();
+			}
+			XSSFWorkbook wb = null;
+			try {
+				wb = new XSSFWorkbook(d);
+			} catch (IOException e) {	
+						e.printStackTrace();
+			}
+			XSSFSheet ws=wb.getSheet("Sheet1");
+			//  Contact_Us Module
+			String module=ws.getRow(69).getCell(1).getStringCellValue();
+			driver.findElement(By.xpath(module)).click();
+			driver.navigate().to("https://www.webmath.com/index5.html");
+		
+}
+		@Test(priority =5 ,groups = " About Module")
+		public void about()  {
+			FileInputStream d = null;
+			try {
+				d = new FileInputStream("C:\\Users\\LENOVO\\Desktop\\Project1 Webmath.xlsx");
+			} catch (FileNotFoundException e) {	
+				e.printStackTrace();
+			}
+			XSSFWorkbook wb = null;
+			try {
+				wb = new XSSFWorkbook(d);
+			} catch (IOException e) {	
+						e.printStackTrace();
+			}
+			XSSFSheet ws=wb.getSheet("Sheet1");
+			//  About Module
+			String module=ws.getRow(70).getCell(1).getStringCellValue();
+			driver.findElement(By.xpath(module)).click();
+			driver.navigate().to("https://www.webmath.com/index5.html");
+		
+		}
+		@Test(priority =6 ,groups = " Why Module")
+		public void whyWebmath()  {
+			FileInputStream d = null;
+			try {
+				d = new FileInputStream("C:\\Users\\LENOVO\\Desktop\\Project1 Webmath.xlsx");
+			} catch (FileNotFoundException e) {	
+				e.printStackTrace();
+			}
+			XSSFWorkbook wb = null;
+			try {
+				wb = new XSSFWorkbook(d);
+			} catch (IOException e) {	
+						e.printStackTrace();
+			}
+			XSSFSheet ws=wb.getSheet("Sheet1");
+		//  Why_Webmath Module
+			String module=ws.getRow(71).getCell(1).getStringCellValue();
+			driver.findElement(By.xpath(module)).click();
+			driver.navigate().to("https://www.webmath.com/index5.html");
+		}
+		@Test(priority =7 ,groups = " Webstie_Map Module")
+		public void webstie_Map()  {
+			FileInputStream d = null;
+			try {
+				d = new FileInputStream("C:\\Users\\LENOVO\\Desktop\\Project1 Webmath.xlsx");
+			} catch (FileNotFoundException e) {	
+					e.printStackTrace();
+			}
+			XSSFWorkbook wb = null;
+			try {
+				wb = new XSSFWorkbook(d);
+			} catch (IOException e) {	
+						e.printStackTrace();
+			}
+			XSSFSheet ws=wb.getSheet("Sheet1");
+		//  Webstie_Map Module
+			String module=ws.getRow(72).getCell(1).getStringCellValue();
+			driver.findElement(By.xpath(module)).click();
+			driver.navigate().to("https://www.webmath.com/index5.html");
+		}
+		@Test(priority =8 ,groups = " Privacy Module")
+		public void privacy()  {
+			FileInputStream d = null;
+			try {
+				d = new FileInputStream("C:\\Users\\LENOVO\\Desktop\\Project1 Webmath.xlsx");
+			} catch (FileNotFoundException e) {	
+					e.printStackTrace();
+			}
+			XSSFWorkbook wb = null;
+			try {
+				wb = new XSSFWorkbook(d);
+			} catch (IOException e) {	
+				e.printStackTrace();
+				
+			}
+			XSSFSheet ws=wb.getSheet("Sheet1");
+		//  Privacy Module
+			String module=ws.getRow(73).getCell(1).getStringCellValue();
+			driver.findElement(By.xpath(module)).click();
+			driver.navigate().to("https://www.webmath.com/index5.html");
+		}
+		@AfterTest
+		public void a1() {
+			driver.close();
+			}
+		}
