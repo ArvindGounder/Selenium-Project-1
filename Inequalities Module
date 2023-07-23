@@ -1,0 +1,80 @@
+package asignments;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+public class Selenium1 {
+	
+	public WebDriver driver;
+	
+	@BeforeTest
+	public void System() {
+		System.setProperty("webdriver.chrome.driver",
+				"C:\\Users\\LENOVO\\Downloads\\chromedriver_win32 (1)\\chromedriver.exe");
+		driver = new ChromeDriver();
+	}
+	
+	@Test(priority = 1,groups = "HomePage Webmath ")
+	public void homePageVisibilty() {
+		driver.get("https://www.webmath.com/");
+		driver.manage().window().maximize();
+		
+	}
+	@Test(priority =2 ,groups = "Plots And Geometry Webmath ")
+	public void plotsAndGeometry() {
+		FileInputStream d = null;
+		try {
+			d = new FileInputStream("C:\\Users\\LENOVO\\Desktop\\Project1 Webmath.xlsx");
+		} catch (FileNotFoundException e) {	
+		e.printStackTrace();
+		}
+		XSSFWorkbook wb = null;
+		try {
+			wb = new XSSFWorkbook(d);
+		} catch (IOException e) {	
+			e.printStackTrace();
+		}
+		XSSFSheet ws=wb.getSheet("Sheet1");
+		//Plots and Geometry
+		String a=ws.getRow(2).getCell(1).getStringCellValue();
+		driver.findElement(By.id(a)).click();
+@Test(priority =3 ,groups = " Inequalities Module")
+		public void inequalities() {
+			FileInputStream d = null;
+			try {
+				d = new FileInputStream("C:\\Users\\LENOVO\\Desktop\\Project1 Webmath.xlsx");
+			} catch (FileNotFoundException e) {	
+				e.printStackTrace();
+			}
+			XSSFWorkbook wb = null;
+			try {
+				wb = new XSSFWorkbook(d);
+			} catch (IOException e) {	
+		e.printStackTrace();
+			}
+			XSSFSheet ws=wb.getSheet("Sheet1");
+	//Inequalities Page
+			String inequalities=ws.getRow(22).getCell(1).getStringCellValue();
+			driver.findElement(By.xpath(inequalities)).click();
+	//Click To Plot
+			String x1=ws.getRow(23).getCell(1).getStringCellValue();
+			driver.findElement(By.xpath(x1)).click();
+			driver.navigate().to("https://www.webmath.com/index5.html");
+		}
+			@AfterTest
+			public void a1() {
+				driver.close();
+				}
+			}
+		
